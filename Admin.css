@@ -1,0 +1,383 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #D2691E 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header Styles */
+.header {
+  background: #292222 !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.brand-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.8rem;
+  color: #D2691E;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.desktop-nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: #F5DEB3;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #D2691E;
+  background: rgba(210, 105, 30, 0.2);
+}
+
+.login-btn {
+  background: linear-gradient(135deg, #8B4513, #A0522D);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #F5DEB3;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #3D2B1F;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  padding: 1rem 0;
+}
+
+.mobile-menu.active {
+  display: block;
+}
+
+.mobile-nav-link, .mobile-login-btn {
+  display: block;
+  padding: 1rem 2rem;
+  color: #F5DEB3;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.mobile-nav-link:hover, .mobile-login-btn:hover {
+  background: rgba(210, 105, 30, 0.2);
+}
+
+/* Main Content */
+.main-content {
+  padding: 2rem 0;
+}
+
+.admin-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #F5DEB3;
+  margin-bottom: 3rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Card Styles */
+.admin-card {
+  background: #FAEBD7;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(210, 105, 30, 0.2);
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.admin-card-header {
+  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+  color: white;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-icon {
+  font-size: 1.5rem;
+}
+
+.admin-card-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.admin-card-content {
+  padding: 1.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.admin-card-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.admin-card-content::-webkit-scrollbar-track {
+  background: #F5DEB3;
+  border-radius: 10px;
+}
+
+.admin-card-content::-webkit-scrollbar-thumb {
+  background: #8B4513;
+  border-radius: 10px;
+}
+
+.admin-card-content ul {
+  list-style: none;
+}
+
+.admin-card-content li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #DDD;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.admin-card-content li:last-child {
+  border-bottom: none;
+}
+
+.admin-card-content li i {
+  color: #8B4513;
+  font-size: 1.1rem;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-left: auto;
+}
+
+.status-approved {
+  background: #D4E6C7;
+  color: #2E7D32;
+}
+
+.status-pending {
+  background: #FFF3CD;
+  color: #8B4513;
+}
+
+.status-rejected {
+  background: #F8D7DA;
+  color: #721C24;
+}
+
+.user-role {
+  background: #E6D3C1;
+  color: #5D4037;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-left: auto;
+}
+
+.user-role.admin {
+  background: #D7C4B0;
+  color: #8B4513;
+}
+
+.user-role.seller {
+  background: #E8D5C4;
+  color: #A0522D;
+}
+
+.user-role.landlord {
+  background: #F0E6D2;
+  color: #CD853F;
+}
+
+/* Feedback and Review specific styles */
+.feedback-item, .review-item {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.feedback-header, .review-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.feedback-user, .review-user {
+  font-weight: 600;
+  color: #8B4513;
+}
+
+.feedback-date, .review-date {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.feedback-content, .review-content {
+  color: #555;
+  line-height: 1.4;
+}
+
+/* Property Info */
+.property-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.property-details {
+  flex: 1;
+}
+
+.property-location {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+/* Complaint specific styles */
+.complaint-item {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: #F5F5DC;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.complaint-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.complaint-user {
+  font-weight: 600;
+  color: #8B0000;
+}
+
+.complaint-date {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.complaint-content {
+  color: #555;
+  line-height: 1.4;
+}
+
+.complaint-status {
+  background: #FFE4E1;
+  color: #8B0000;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-title {
+    font-size: 2rem;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-card-header {
+    padding: 1rem;
+  }
+
+  .admin-card-content {
+    padding: 1rem;
+  }}
