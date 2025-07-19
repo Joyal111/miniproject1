@@ -80,9 +80,9 @@ $isLoggedIn = isset($_SESSION['user_id']);
           <li>Legal paperwork assistance</li>
           <li>Secure and transparent process</li>
         </ul>
-        <button class="card-button" onclick="handleClick('sell-house')">
-          Start Selling
-        </button>
+       <button class="card-button" onclick="window.location.href='sell_rent_listings.php'">
+  Start Selling
+</button>
       </div>
     </div>
 

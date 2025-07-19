@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+include 'db.php';
+
+$isLoggedIn = isset($_SESSION['user_id']);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,38 +16,72 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" />
-    <link rel="stylesheet" href="Home.css" />
+    <link rel="stylesheet" href="home.css" />
   </head>
   <body class="ab">
     <!-- Navigation Bar -->
     <header class="header">
       <div class="container header-container">
         <div class="header-logo">
-          <a href="Home.html" class="brand-title">
+          <a href="home.php" class="brand-title">
             DwellKart
           </a>
         </div>
         <nav class="desktop-nav" id="desktop-nav">
-          <a href="Home.html" class="nav-link">Home</a>
-          <a href="#" class="nav-link">Listings</a>
-          <a href="postproperty.html" class="nav-link">Post Property</a>
-          <a href="" class="nav-link">Featured Ads</a>
-          <a href="aboutus.html" class="nav-link active">About Us</a>
-          <a href="Login.html" class="login-btn">Login</a>
+          <a href="home.php" class="nav-link">Home</a>
+          <?php if ($isLoggedIn): ?>
+            <a href="listings.php" class="nav-link">Listings</a>
+            <a href="postproperty.php" class="nav-link">Post Property</a>
+            <a href="featured.php" class="nav-link">Featured Ads</a>
+          <?php else: ?>
+            <a href="#" class="nav-link" onclick="showLoginPrompt()">Listings</a>
+            <a href="#" class="nav-link" onclick="showLoginPrompt()">Post Property</a>
+            <a href="#" class="nav-link" onclick="showLoginPrompt()">Featured Ads</a>
+          <?php endif; ?>
+          <a href="aboutus.php" class="nav-link active">About Us</a>
+          <?php if ($isLoggedIn): ?>
+            <a href="useraccount.php" class="account-btn" title="Account"><i class="ri-user-3-line"></i></a>
+          <?php else: ?>
+            <a href="login.php" class="login-attractive-btn" title="Login">Login</a>
+          <?php endif; ?>
         </nav>
         <button id="mobile-menu-button" class="mobile-menu-btn" aria-label="Open menu">
           <i class="ri-menu-line ri-2x"></i>
         </button>
       </div>
       <div id="mobile-menu" class="mobile-menu">
-        <a href="Home.html" class="mobile-nav-link">Home</a>
-        <a href="#" class="mobile-nav-link">Listings</a>
-        <a href="postproperty.html" class="mobile-nav-link">Post Property</a>
-        <a href="#" class="mobile-nav-link">Featured Ads</a>
-        <a href="aboutus.html" class="mobile-nav-link active">About Us</a>
-        <a href="Login.html" class="mobile-login-btn">Login</a>
+        <a href="home.php" class="mobile-nav-link">Home</a>
+        <?php if ($isLoggedIn): ?>
+          <a href="listings.php" class="mobile-nav-link">Listings</a>
+          <a href="postproperty.php" class="mobile-nav-link">Post Property</a>
+          <a href="featured.php" class="mobile-nav-link">Featured Ads</a>
+        <?php else: ?>
+          <a href="#" class="mobile-nav-link" onclick="showLoginPrompt()">Listings</a>
+          <a href="#" class="mobile-nav-link" onclick="showLoginPrompt()">Post Property</a>
+          <a href="#" class="mobile-nav-link" onclick="showLoginPrompt()">Featured Ads</a>
+        <?php endif; ?>
+        <a href="aboutus.php" class="mobile-nav-link active">About Us</a>
+        <?php if ($isLoggedIn): ?>
+          <a href="useraccount.php" class="account-btn" title="Account"><i class="ri-user-3-line"></i></a>
+        <?php else: ?>
+          <a href="login.php" class="login-attractive-btn" title="Login">Login</a>
+        <?php endif; ?>
       </div>
     </header>
+    
+    <!-- Login Prompt Modal -->
+    <div id="loginModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close" onclick="closeLoginPrompt()">&times;</span>
+        <h2>Login Required</h2>
+        <p>Please login to access this feature and explore all the amazing properties and accommodations we have to offer.</p>
+        <div class="modal-buttons">
+          <a href="login.php" class="btn btn-primary">Login Now</a>
+          <button onclick="closeLoginPrompt()" class="btn btn-secondary">Cancel</button>
+        </div>
+      </div>
+    </div>
+    
     <main class="main-content">
       <!-- About Us Content Starts Here -->
       <section class="categories-section" style="background: #EFEBE7;">
@@ -119,6 +160,7 @@
         </div>
       </section>
       <!-- About Us Content Ends Here -->
+      
       <!-- Footer -->
       <footer class="footer">
         <div class="container">
@@ -136,20 +178,32 @@
             <div>
               <h4 class="footer-subtitle">Quick Links</h4>
               <ul class="footer-list">
-                <li><a href="Home.html" class="footer-link">Home</a></li>
-                <li><a href="aboutus.html" class="footer-link">About Us</a></li>
+                <li><a href="home.php" class="footer-link">Home</a></li>
+                <li><a href="aboutus.php" class="footer-link">About Us</a></li>
                 <li><a href="#" class="footer-link">Contact</a></li>
-                <li><a href="#" class="footer-link">Listings</a></li>
+                <?php if ($isLoggedIn): ?>
+                  <li><a href="listings.php" class="footer-link">Listings</a></li>
+                <?php else: ?>
+                  <li><a href="#" class="footer-link" onclick="showLoginPrompt()">Listings</a></li>
+                <?php endif; ?>
               </ul>
             </div>
             <div>
               <h4 class="footer-subtitle">Property Types</h4>
               <ul class="footer-list">
-                <li><a href="#" class="footer-link">House & Apartments(sell)</a></li>
-                <li><a href="#" class="footer-link">House & Apartments(rent)</a></li>
-                <li><a href="#" class="footer-link">Land and plots</a></li>
-                <li><a href="#" class="footer-link">Homestays</a></li>
-                <li><a href="#" class="footer-link">PG (Paying Guest)</a></li>
+                <?php if ($isLoggedIn): ?>
+                  <li><a href="listings.php?category=sell-houses" class="footer-link">House & Apartments(sell)</a></li>
+                  <li><a href="listings.php?category=rent-houses" class="footer-link">House & Apartments(rent)</a></li>
+                  <li><a href="listings.php?category=sell-land" class="footer-link">Land and plots</a></li>
+                  <li><a href="listings.php?category=homestays" class="footer-link">Homestays</a></li>
+                  <li><a href="listings.php?category=pg" class="footer-link">PG (Paying Guest)</a></li>
+                <?php else: ?>
+                  <li><a href="#" class="footer-link" onclick="showLoginPrompt()">House & Apartments(sell)</a></li>
+                  <li><a href="#" class="footer-link" onclick="showLoginPrompt()">House & Apartments(rent)</a></li>
+                  <li><a href="#" class="footer-link" onclick="showLoginPrompt()">Land and plots</a></li>
+                  <li><a href="#" class="footer-link" onclick="showLoginPrompt()">Homestays</a></li>
+                  <li><a href="#" class="footer-link" onclick="showLoginPrompt()">PG (Paying Guest)</a></li>
+                <?php endif; ?>
               </ul>
             </div>
             <div>
@@ -172,14 +226,17 @@
         </div>
       </footer>
     </main>
+    
     <!-- Mobile Menu Toggle Script -->
     <script>
       const menuBtn = document.getElementById("mobile-menu-button");
       const mobileMenu = document.getElementById("mobile-menu");
+      
       menuBtn.addEventListener("click", function (e) {
         e.stopPropagation();
         mobileMenu.classList.toggle("active");
       });
+      
       document.addEventListener("click", function (e) {
         if (
           mobileMenu.classList.contains("active") &&
@@ -189,11 +246,29 @@
           mobileMenu.classList.remove("active");
         }
       });
+      
       mobileMenu.querySelectorAll("a").forEach(function (link) {
         link.addEventListener("click", function () {
           mobileMenu.classList.remove("active");
         });
       });
+      
+      // Login prompt functions
+      function showLoginPrompt() {
+        document.getElementById('loginModal').style.display = 'block';
+      }
+      
+      function closeLoginPrompt() {
+        document.getElementById('loginModal').style.display = 'none';
+      }
+      
+      // Close modal when clicking outside of it
+      window.onclick = function(event) {
+        const modal = document.getElementById('loginModal');
+        if (event.target == modal) {
+          modal.style.display = 'none';
+        }
+      }
     </script>
   </body>
 </html>

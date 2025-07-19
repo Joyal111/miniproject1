@@ -144,6 +144,7 @@ $stmt->close();
                     </div>
                 </div>
             </div>
+            
             <!-- My Listings Card (STATIC) -->
             <div class="ua-card ua-card-listings">
                 <div class="ua-card-header">
@@ -272,7 +273,7 @@ $stmt->close();
             </div>
             <div style="margin-bottom:1rem;">
                 <label>Email</label>
-                <input type="email" name="email" value="<?= htmlspecialchars($email) ?>" required style="width:100%;padding:0.5rem;margin-top:0.2rem;">
+                <input type="email" name="email" value="<?= htmlspecialchars($email) ?>" required style="width:100%;padding:0.5rem;margin-top:0.2rem;" readonly>
             </div>
             <div style="margin-bottom:1rem;">
                 <label>Phone</label>

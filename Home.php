@@ -29,9 +29,18 @@ $isLoggedIn = isset($_SESSION['user_id']);
         </div>
         <nav class="desktop-nav" id="desktop-nav">
           <a href="home.php" class="nav-link">Home</a>
-          <a href="#" class="nav-link">Listings</a>
-          <a href="postproperty.php" class="nav-link">Post Property</a>
-          <a href="#" class="nav-link">Featured Ads</a>
+          <?php if ($isLoggedIn): ?>
+            <a href="listings.php" class="nav-link">Listings</a>
+            <a href="postproperty.php" class="nav-link">Post Property</a>
+            <a href="featured.php" class="nav-link">Featured Ads</a>
+          
+          <?php else: ?>
+            <a href="#" class="nav-link" onclick="showLoginPrompt()">Listings</a>
+            <a href="#" class="nav-link" onclick="showLoginPrompt()">Post Property</a>
+            <a href="#" class="nav-link" onclick="showLoginPrompt()">Featured Ads</a>
+                       
+
+          <?php endif; ?>
           <a href="aboutus.php" class="nav-link">About Us</a>
           <?php if ($isLoggedIn): ?>
             <a href="useraccount.php" class="account-btn" title="Account"><i class="ri-user-3-line"></i></a>
@@ -45,9 +54,15 @@ $isLoggedIn = isset($_SESSION['user_id']);
       </div>
       <div id="mobile-menu" class="mobile-menu">
         <a href="home.php" class="mobile-nav-link">Home</a>
-        <a href="#" class="mobile-nav-link">Listings</a>
-        <a href="postproperty.php" class="mobile-nav-link">Post Property</a>
-        <a href="#" class="mobile-nav-link">Featured Ads</a>
+        <?php if ($isLoggedIn): ?>
+          <a href="listings.php" class="mobile-nav-link">Listings</a>
+          <a href="postproperty.php" class="mobile-nav-link">Post Property</a>
+          <a href="featured.php" class="mobile-nav-link">Featured Ads</a>
+        <?php else: ?>
+          <a href="#" class="mobile-nav-link" onclick="showLoginPrompt()">Listings</a>
+          <a href="#" class="mobile-nav-link" onclick="showLoginPrompt()">Post Property</a>
+          <a href="#" class="mobile-nav-link" onclick="showLoginPrompt()">Featured Ads</a>
+        <?php endif; ?>
         <a href="aboutus.php" class="mobile-nav-link">About Us</a>
         <?php if ($isLoggedIn): ?>
           <a href="useraccount.php" class="account-btn" title="Account"><i class="ri-user-3-line"></i></a>
@@ -56,6 +71,20 @@ $isLoggedIn = isset($_SESSION['user_id']);
         <?php endif; ?>
       </div>
     </header>
+    
+    <!-- Login Prompt Modal -->
+    <div id="loginModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close" onclick="closeLoginPrompt()">&times;</span>
+        <h2>Login Required</h2>
+        <p>Please login to access this feature and explore all the amazing properties and accommodations we have to offer.</p>
+        <div class="modal-buttons">
+          <a href="login.php" class="btn btn-primary">Login Now</a>
+          <button onclick="closeLoginPrompt()" class="btn btn-secondary">Cancel</button>
+        </div>
+      </div>
+    </div>
+    
     <main class="main-content">
       <!-- Hero Section -->
       <section class="hero-section">
@@ -63,8 +92,13 @@ $isLoggedIn = isset($_SESSION['user_id']);
           <h1 class="hero-title">Find Your Dream Property or Stay</h1>
           <p class="hero-subtitle">Buy, Rent, or Book Homestays All in One Place</p>
           <div class="hero-btns">
-            <a href="#" class="btn btn-primary">Explore Listings</a>
-            <a href="postproperty.php" class="btn btn-secondary">Post Your Property</a>
+            <?php if ($isLoggedIn): ?>
+              <a href="listings.php" class="btn btn-primary">Explore Listings</a>
+              <a href="postproperty.php" class="btn btn-secondary">Post Your Property</a>
+            <?php else: ?>
+              <a href="#" class="btn btn-primary" onclick="showLoginPrompt()">Explore Listings</a>
+              <a href="#" class="btn btn-secondary" onclick="showLoginPrompt()">Post Your Property</a>
+            <?php endif; ?>
           </div>
         </div>
       </section>
@@ -85,9 +119,15 @@ $isLoggedIn = isset($_SESSION['user_id']);
               <div class="category-info">
                 <h3 class="category-title">Sell - Houses & Apartments</h3>
                 <p class="category-desc">Find your dream home to purchase with full ownership</p>
-                <a href="#" class="category-link">
-                  Explore <i class="ri-arrow-right-line align-middle ml-1"></i>
-                </a>
+                <?php if ($isLoggedIn): ?>
+                  <a href="listings.php?category=sell-houses" class="category-link">
+                    Explore <i class="ri-arrow-right-line align-middle ml-1"></i>
+                  </a>
+                <?php else: ?>
+                  <a href="#" class="category-link" onclick="showLoginPrompt()">
+                    Explore <i class="ri-arrow-right-line align-middle ml-1"></i>
+                  </a>
+                <?php endif; ?>
               </div>
             </div>
             <div class="category-card fade-in-up delay-2">
@@ -97,9 +137,15 @@ $isLoggedIn = isset($_SESSION['user_id']);
               <div class="category-info">
                 <h3 class="category-title">Sell - Land & Plots</h3>
                 <p class="category-desc">Invest in land and plots for future development</p>
-                <a href="#" class="category-link">
-                  Explore <i class="ri-arrow-right-line align-middle ml-1"></i>
-                </a>
+                <?php if ($isLoggedIn): ?>
+                  <a href="listings.php?category=sell-land" class="category-link">
+                    Explore <i class="ri-arrow-right-line align-middle ml-1"></i>
+                  </a>
+                <?php else: ?>
+                  <a href="#" class="category-link" onclick="showLoginPrompt()">
+                    Explore <i class="ri-arrow-right-line align-middle ml-1"></i>
+                  </a>
+                <?php endif; ?>
               </div>
             </div>
             <div class="category-card fade-in-up delay-3">
@@ -109,9 +155,15 @@ $isLoggedIn = isset($_SESSION['user_id']);
               <div class="category-info">
                 <h3 class="category-title">Rent - Houses & Apartments</h3>
                 <p class="category-desc">Find rental properties for long-term accommodation</p>
-                <a href="#" class="category-link">
-                  Explore <i class="ri-arrow-right-line align-middle ml-1"></i>
-                </a>
+                <?php if ($isLoggedIn): ?>
+                  <a href="listings.php?category=rent-houses" class="category-link">
+                    Explore <i class="ri-arrow-right-line align-middle ml-1"></i>
+                  </a>
+                <?php else: ?>
+                  <a href="#" class="category-link" onclick="showLoginPrompt()">
+                    Explore <i class="ri-arrow-right-line align-middle ml-1"></i>
+                  </a>
+                <?php endif; ?>
               </div>
             </div>
             <div class="category-card fade-in-up delay-4">
@@ -121,14 +173,21 @@ $isLoggedIn = isset($_SESSION['user_id']);
               <div class="category-info">
                 <h3 class="category-title">Homestays</h3>
                 <p class="category-desc">Book unique homestays for short-term accommodation</p>
-                <a href="#" class="category-link">
-                  Explore <i class="ri-arrow-right-line align-middle ml-1"></i>
-                </a>
+                <?php if ($isLoggedIn): ?>
+                  <a href="listings.php?category=homestays" class="category-link">
+                    Explore <i class="ri-arrow-right-line align-middle ml-1"></i>
+                  </a>
+                <?php else: ?>
+                  <a href="#" class="category-link" onclick="showLoginPrompt()">
+                    Explore <i class="ri-arrow-right-line align-middle ml-1"></i>
+                  </a>
+                <?php endif; ?>
               </div>
             </div>
           </div>
         </div>
       </section>
+      
       <!-- How it Works Section -->
       <section class="hiw-section">
         <div class="container">
@@ -172,6 +231,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
           </div>
         </div>
       </section>
+      
       <!-- Footer -->
       <footer class="footer">
         <div class="container">
@@ -192,16 +252,27 @@ $isLoggedIn = isset($_SESSION['user_id']);
                 <li><a href="home.php" class="footer-link">Home</a></li>
                 <li><a href="aboutus.php" class="footer-link">About Us</a></li>
                 <li><a href="#" class="footer-link">Contact</a></li>
-                <li><a href="#" class="footer-link">Listings</a></li>
+                <?php if ($isLoggedIn): ?>
+                  <li><a href="listings.php" class="footer-link">Listings</a></li>
+                <?php else: ?>
+                  <li><a href="#" class="footer-link" onclick="showLoginPrompt()">Listings</a></li>
+                <?php endif; ?>
               </ul>
             </div>
             <div>
               <h4 class="footer-subtitle">Property Types</h4>
               <ul class="footer-list">
-                <li><a href="#" class="footer-link">House & Apartments(sell)</a></li>
-                <li><a href="#" class="footer-link">House & Apartments(rent)</a></li>
-                <li><a href="#" class="footer-link">Land and plots</a></li>
-                <li><a href="#" class="footer-link">Homestays</a></li>
+                <?php if ($isLoggedIn): ?>
+                  <li><a href="listings.php?category=sell-houses" class="footer-link">House & Apartments(sell)</a></li>
+                  <li><a href="listings.php?category=rent-houses" class="footer-link">House & Apartments(rent)</a></li>
+                  <li><a href="listings.php?category=sell-land" class="footer-link">Land and plots</a></li>
+                  <li><a href="listings.php?category=homestays" class="footer-link">Homestays</a></li>
+                <?php else: ?>
+                  <li><a href="#" class="footer-link" onclick="showLoginPrompt()">House & Apartments(sell)</a></li>
+                  <li><a href="#" class="footer-link" onclick="showLoginPrompt()">House & Apartments(rent)</a></li>
+                  <li><a href="#" class="footer-link" onclick="showLoginPrompt()">Land and plots</a></li>
+                  <li><a href="#" class="footer-link" onclick="showLoginPrompt()">Homestays</a></li>
+                <?php endif; ?>
               </ul>
             </div>
             <div>
@@ -224,15 +295,18 @@ $isLoggedIn = isset($_SESSION['user_id']);
         </div>
       </footer>
     </main>
+    
     <!-- Mobile Menu Toggle Script -->
     <script>
       const menuBtn = document.getElementById("mobile-menu-button");
       const mobileMenu = document.getElementById("mobile-menu");
       const desktopNav = document.getElementById("desktop-nav");
+      
       menuBtn.addEventListener("click", function (e) {
         e.stopPropagation();
         mobileMenu.classList.toggle("active");
       });
+      
       document.addEventListener("click", function (e) {
         if (
           mobileMenu.classList.contains("active") &&
@@ -242,11 +316,29 @@ $isLoggedIn = isset($_SESSION['user_id']);
           mobileMenu.classList.remove("active");
         }
       });
+      
       mobileMenu.querySelectorAll("a").forEach(function (link) {
         link.addEventListener("click", function () {
           mobileMenu.classList.remove("active");
         });
       });
+      
+      // Login prompt functions
+      function showLoginPrompt() {
+        document.getElementById('loginModal').style.display = 'block';
+      }
+      
+      function closeLoginPrompt() {
+        document.getElementById('loginModal').style.display = 'none';
+      }
+      
+      // Close modal when clicking outside of it
+      window.onclick = function(event) {
+        const modal = document.getElementById('loginModal');
+        if (event.target == modal) {
+          modal.style.display = 'none';
+        }
+      }
     </script>
   </body>
 </html>
